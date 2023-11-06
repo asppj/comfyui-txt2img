@@ -114,7 +114,8 @@ class Predictor(BasePredictor):
             input_prompt = input_prompt,
             negative_prompt = negative_prompt,
             steps = steps,
-            seed = seed
+            seed = seed,
+            prompt=workflow,
         )
         return Path(img_output_path)
 
