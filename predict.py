@@ -1,6 +1,8 @@
+from pydoc import describe
 import subprocess
 import threading
 import time
+from tkinter import NO
 from cog import BasePredictor, Input, Path
 # from typing import List
 import os
@@ -99,6 +101,7 @@ class Predictor(BasePredictor):
             default=30
         ),
         seed: int = Input(description="Sampling seed, leave Empty for Random", default=None),
+        workflow:dict=Input(description="custom workflow[other args is invalid if workflow is  exists]",default=None)
     ) -> Path:
         """Run a single prediction on the model"""
         if seed is None:
@@ -116,12 +119,14 @@ class Predictor(BasePredictor):
         return Path(img_output_path)
 
 
-    def get_workflow_output(self, input_prompt, negative_prompt, steps, seed):
+    def get_workflow_output(self, input_prompt, negative_prompt, steps, seed,prompt=None):
         # load config
-        prompt = None
-        workflow_config = "./custom_workflows/sdxl_txt2img.json"
-        with open(workflow_config, 'r') as file:
-            prompt = json.load(file)
+        # prompt = None
+        if prompt is None:
+            workflow_config = "./custom_workflows/sdxl_txt2img.json"
+            with open(workflow_config, 'r') as file:
+                prompt = json.load(file)
+            print(f"use default workflow:\n{prompt}\n")
 
         if not prompt:
             raise Exception('no workflow config found')
