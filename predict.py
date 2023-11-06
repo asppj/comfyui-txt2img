@@ -101,7 +101,7 @@ class Predictor(BasePredictor):
             default=30
         ),
         seed: int = Input(description="Sampling seed, leave Empty for Random", default=None),
-        workflow:dict=Input(description="custom workflow[other args is invalid if workflow is  exists]",default=None)
+        workflow:str=Input(description="json str, custom workflow[other args is invalid if workflow is  exists]",default=None)
     ) -> Path:
         """Run a single prediction on the model"""
         if seed is None:
@@ -115,7 +115,7 @@ class Predictor(BasePredictor):
             negative_prompt = negative_prompt,
             steps = steps,
             seed = seed,
-            prompt=workflow,
+            prompt=json.loads(workflow) if workflow else None,
         )
         return Path(img_output_path)
 
