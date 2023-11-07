@@ -16,6 +16,8 @@ from PIL import Image
 from urllib.error import URLError
 import random
 
+from default_workflow import DEFAULT_WORKFLOW
+
 
 class Predictor(BasePredictor):
     def setup(self):
@@ -98,10 +100,10 @@ class Predictor(BasePredictor):
         negative_prompt: str = Input(description="Negative Prompt", default="text, watermark, ugly, blurry"),
         steps: int = Input(
             description="Steps",
-            default=30
+            default=20
         ),
         seed: int = Input(description="Sampling seed, leave Empty for Random", default=None),
-        workflow:str=Input(description="json str, custom workflow[other args is invalid if workflow is  exists]",default=None)
+        workflow:str=Input(description="json str, custom workflow[other args is invalid if workflow is  exists]",default=DEFAULT_WORKFLOW)
     ) -> Path:
         """Run a single prediction on the model"""
         if seed is None:
@@ -152,3 +154,4 @@ class Predictor(BasePredictor):
                 image = Image.open(io.BytesIO(image_data))
                 image.save("out-"+node_id+".png")
                 return Path("out-"+node_id+".png")
+        ws.close()
