@@ -1,4 +1,4 @@
-DEFAULT_WORKFLOW="""{
+DEFAULT_WORKFLOW={
   "3": {
     "inputs": {
       "seed": 196429611935343,
@@ -28,7 +28,8 @@ DEFAULT_WORKFLOW="""{
   },
   "4": {
     "inputs": {
-      "ckpt_name": "sd_xl_base_1.0.safetensors"
+      # "ckpt_name": "sd_xl_base_1.0.safetensors"
+      "ckpt_name": "cheeseDaddys_41.safetensors"
     },
     "class_type": "CheckpointLoaderSimple"
   },
@@ -83,4 +84,4 @@ DEFAULT_WORKFLOW="""{
     },
     "class_type": "SaveImage"
   }
-}"""
+}
