@@ -59,7 +59,6 @@ class ComfyServer:
             return False
 
 
-
 class Client:
     pass
 
@@ -76,7 +75,7 @@ class Client:
         self.ws.close()
         return
 
-    def __init__(self,workflow: dict = default_workflow.DEFAULT_WORKFLOW):
+    def __init__(self, workflow: dict = default_workflow.DEFAULT_WORKFLOW):
         srv = ComfyServer()
         self.workflow = workflow
         self.server_address = srv.server_address

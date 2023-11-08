@@ -50,7 +50,7 @@ class Predictor(BasePredictor):
                                   default=json.dumps(DEFAULT_WORKFLOW))
     ) -> Path:
         print("run predict")
-        with Client(self.server_address) as c:
+        with Client() as c:
             print("run workflow")
             res = c.run_workflow()
             print("result", res)
