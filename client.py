@@ -17,7 +17,7 @@ class Client:
         self.client_id = str(uuid.uuid4())
         self.ws = websocket.WebSocket()
         self.ws.connect("ws://{}/ws?clientId={}".format(self.server_address, self.client_id))
-
+        self.check_model()
 
         return self
 
@@ -28,6 +28,24 @@ class Client:
     def __init__(self, server_address: str, workflow: dict = default_workflow.DEFAULT_WORKFLOW):
         self.workflow = workflow
         self.server_address = server_address
+
+    def check_model(self):
+        pass
+        for item in self.workflow.values():
+            if isinstance(item, dict):
+                if item.get("class_type", "") == "CheckpointLoaderSimple":
+                    pass
+                    """"inputs": {
+                      "ckpt_name": "sd_xl_base_1.0.safetensors"
+                      # "ckpt_name": "sd_xl_base_1.0.safetensors"
+                    },"""
+                    if ckpt_name := item.get("inputs", {}).get("ckpt_name", None):
+                        print("ckpt model is ", ckpt_name)
+                        # from transformers import AutoModel
+                        # print(f"pre load {ckpt_name}")
+                        # model = AutoModel.from_pretrained(ckpt_name)
+                        # model.save_pretrained("models/checkpoints")
+                        # print(ckpt_name, "auto load")
 
     def run_workflow(self) -> str:
         images = self.get_images(self.ws, self.workflow, self.client_id)
@@ -56,9 +74,9 @@ class Client:
         #     return response.read()
 
     def get_images(self, ws, prompt, client_id):
-        res= self.queue_prompt(prompt, client_id)
+        res = self.queue_prompt(prompt, client_id)
         print(res)
-        prompt_id=res['prompt_id']
+        prompt_id = res['prompt_id']
         output_images = {}
         while True:
             out = ws.recv()
