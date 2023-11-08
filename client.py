@@ -56,7 +56,9 @@ class Client:
         #     return response.read()
 
     def get_images(self, ws, prompt, client_id):
-        prompt_id = self.queue_prompt(prompt, client_id)['prompt_id']
+        res= self.queue_prompt(prompt, client_id)
+        print(res)
+        prompt_id=res['prompt_id']
         output_images = {}
         while True:
             out = ws.recv()
