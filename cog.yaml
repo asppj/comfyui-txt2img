@@ -26,11 +26,11 @@ build:
     - websocket-client==1.6.3
     - requests
 
-  run:
-    - git clone https://github.com/comfyanonymous/ComfyUI.git
-    - mkdir -p models/checkpoints
-    - rm -rf ComfyUI/models/checkpoints
-    - ln -s /src/models/checkpoints ComfyUI/models/checkpoints
+#  run:
+#    - git clone https://github.com/comfyanonymous/ComfyUI.git
+#    - mkdir -p models/checkpoints
+#    - rm -rf ComfyUI/models/checkpoints
+#    - ln -s /src/models/checkpoints ComfyUI/models/checkpoints
 #    - wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -P models/checkpoints/
 #    - wget https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors -P models/checkpoints/
 # predict.py defines how predictions are run on your model
