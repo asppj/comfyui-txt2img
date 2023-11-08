@@ -38,7 +38,7 @@ class ComfyServer:
         server_thread.start()
 
         while not self.is_server_running():
-            time.sleep(1)  # Wait for 1 second before checking again
+            time.sleep(3)  # Wait for 1 second before checking again
 
         print("Server is up and running!")
 

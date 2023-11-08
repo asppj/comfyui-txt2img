@@ -8,10 +8,11 @@ build:
   python_version: "3.10.6"
 
   python_packages:
-    - torch
-    - torchvision
     - torchaudio
     - torchsde
+    - "numpy==1.19.4"
+    - "torch==1.8.0"
+    - "torchvision==0.9.0"
     - einops
     - transformers>=4.25.1
     - safetensors>=0.3.0
