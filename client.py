@@ -64,7 +64,6 @@ class Client:
     pass
 
     def __enter__(self):
-        ComfyServer()
         # start the process
         self.client_id = str(uuid.uuid4())
         self.ws = websocket.WebSocket()
@@ -77,9 +76,10 @@ class Client:
         self.ws.close()
         return
 
-    def __init__(self, server_address: str, workflow: dict = default_workflow.DEFAULT_WORKFLOW):
+    def __init__(self,workflow: dict = default_workflow.DEFAULT_WORKFLOW):
+        srv = ComfyServer()
         self.workflow = workflow
-        self.server_address = server_address
+        self.server_address = srv.server_address
 
     def check_model(self):
         pass
